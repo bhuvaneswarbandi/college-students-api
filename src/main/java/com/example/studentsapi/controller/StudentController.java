@@ -2,40 +2,42 @@ package com.example.studentsapi.controller;
 
 import com.example.studentsapi.model.Student;
 import com.example.studentsapi.service.StudentService;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    private final StudentService service;
+    private final StudentService studentService;
 
-    public StudentController(StudentService service) {
-        this.service = service;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    // POST /students - Add a new student
+    // Add a single student
     @PostMapping
-    public ResponseEntity<Student> addStudent(@Valid @RequestBody Student student) {
-        Student saved = service.saveStudent(student);
-        return ResponseEntity.ok(saved);
+    public Student addStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student);
     }
 
-    // GET /students - List all students
+    // Add multiple students
+    @PostMapping("/batch")
+    public List<Student> addStudents(@RequestBody List<Student> students) {
+        return studentService.saveStudents(students);
+    }
+
+    // Get all students
     @GetMapping
-    public ResponseEntity<List<Student>> getAllStudents() {
-        return ResponseEntity.ok(service.getAllStudents());
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
-    // GET /students/{id} - Get student by ID
+    // Get a student by ID
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
-        return service.getStudentById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<Student> getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id);
     }
 }
