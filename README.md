@@ -26,6 +26,7 @@ Spring Boot REST API for managing student records with MySQL and JPA.
 ```
 
 ### ➕ Add Multiple Students
+```json
 [
   {
     "name": "Rosy",
@@ -40,7 +41,7 @@ Spring Boot REST API for managing student records with MySQL and JPA.
     "year": 2
   }
 ]
-
+```
 ### 🚀 How to Run
 Start MySQL and ensure the college_students database exists:
 CREATE DATABASE college_students;
