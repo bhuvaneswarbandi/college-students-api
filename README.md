@@ -40,12 +40,13 @@ Spring Boot REST API for managing student records with MySQL and JPA.
     "year": 2
   }
 ]
-🚀 How to Run
+
+### 🚀 How to Run
 Start MySQL and ensure the college_students database exists:
 CREATE DATABASE college_students;
 
-Then configure your database credentials in the file:
+### Then configure your database credentials in the file:
 src/main/resources/application.properties
 
-Run the application using:
+### Run the application using:
 ./mvnw spring-boot:run
